@@ -1,0 +1,527 @@
+/* Combined CSS for Queens Puzzle Game */
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #1A1D2E; /* Deep dark blue/purple from image inspiration */
+    --surface-color: #2C2F48; /* Slightly lighter for surfaces */
+    --glass-bg: rgba(44, 47, 72, 0.6); /* Translucent surface color */
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --text-primary: #EAEAEA; /* Light grey for primary text */
+    --text-secondary: #B0B0D0; /* Softer light purple/grey for secondary text */
+    --accent-primary: #7F5AF0; /* Vibrant purple for accents */
+    --accent-secondary: #2CB67D; /* A contrasting green for positive feedback or secondary accents */
+    --accent-gradient: linear-gradient(135deg, var(--accent-primary) 0%, #A78BFA 100%); /* Purple gradient */
+    --glow-effect: 0 0 15px rgba(127, 90, 240, 0.5), 0 0 5px rgba(127, 90, 240, 0.3);
+    --border-radius: 16px; /* Consistent rounded corners */
+    --small-radius: 8px;
+    --transition: all 0.3s ease-in-out;
+    --font-main: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: var(--font-main);
+    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+}
+
+/* Header Styles */
+header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px 0;
+    border-bottom: var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 2rem; 
+    color: var(--text-primary);
+    text-shadow: 0 0 10px rgba(234, 234, 234, 0.3);
+}
+
+/* Main Content Styles */
+main.container {
+    flex-grow: 1;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* Button Styles */
+.button, .primary-button {
+    display: inline-block;
+    background: var(--accent-gradient);
+    color: white;
+    padding: 12px 24px;
+    border-radius: var(--small-radius);
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.button:hover, .primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-effect), 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 25px 20px;
+    background: var(--surface-color);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    border-top: var(--glass-border);
+    margin-top: auto; /* Pushes footer to bottom if content is short */
+}
+
+/* Game-specific elements */
+.game-header {
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 25px;
+    border: var(--glass-border);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.game-title h2 {
+    color: var(--accent-primary);
+    margin-bottom: 12px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.rules {
+    list-style: none;
+    margin: 15px 0;
+    padding: 0;
+}
+
+.rules li {
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 1.8em;
+    font-size: 0.9rem;
+}
+
+.rules li::before {
+    content: '\2022'; /* Bullet character */
+    color: var(--accent-primary);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1.5em;
+    position: absolute;
+    left: 0.5em;
+    top: 0.1em;
+}
+
+/* Controls list in instructions */
+.controls-list {
+    list-style: none;
+    margin: 15px 0;
+    padding: 0;
+}
+
+.controls-list li {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 1.8em;
+    font-size: 0.9rem;
+}
+
+.controls-list li i {
+    color: var(--accent-primary);
+    position: absolute;
+    left: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.7rem;
+    }
+    .game-title h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+}
+
+/* Queens Game Specific Styles */
+.queens-game-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Game Header Layout */
+.game-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    gap: 15px;
+}
+
+.difficulty-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.difficulty-buttons button {
+    background-color: var(--surface-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: var(--small-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.difficulty-buttons button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.difficulty-buttons button.active {
+    background: var(--accent-gradient);
+    color: white;
+    border-color: transparent;
+    box-shadow: var(--glow-effect);
+}
+
+.game-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.icon-button {
+    background: var(--surface-color);
+    border: var(--glass-border);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-secondary);
+}
+
+.icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.icon-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.auto-x-toggle {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.auto-x-toggle input {
+    margin-right: 5px;
+}
+
+#timer {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    border-radius: var(--small-radius);
+    color: var(--accent-secondary);
+    font-family: monospace;
+    font-size: 0.9rem;
+    min-width: 70px;
+    text-align: center;
+}
+
+/* Game Container */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    border: var(--glass-border);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Game Board */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Default, will be updated in JS */
+    gap: 4px;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cell {
+    background-color: #2C2F48; /* Default, will be updated in JS */
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    font-size: 1.5rem;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.cell:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(127, 90, 240, 0.3);
+    z-index: 10;
+}
+
+.cell.queen::after {
+    content: '♛';
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.cell.marked::after {
+    content: '×';
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.6rem;
+    font-weight: 700;
+    animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.cell.error {
+    animation: errorShake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.7);
+    z-index: 20;
+}
+
+.cell.highlight {
+    box-shadow: 0 0 0 2px var(--accent-secondary), 0 0 15px rgba(44, 182, 125, 0.6);
+    z-index: 20;
+    animation: pulse 1.5s infinite;
+}
+
+/* Game Messages */
+#game-message {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: var(--small-radius);
+    transition: var(--transition);
+    font-weight: 500;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+#game-message.error {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+#game-message.success {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+#game-message.hint {
+    background-color: rgba(241, 196, 15, 0.2);
+    color: #f1c40f;
+}
+
+/* Instructions Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--bg-color);
+    border: var(--glass-border);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    max-width: 550px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.modal-content h3 {
+    color: var(--accent-primary);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.modal-content p {
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+}
+
+/* Animations */
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 2px var(--accent-secondary), 0 0 15px rgba(44, 182, 125, 0.6); }
+    50% { box-shadow: 0 0 0 2px var(--accent-secondary), 0 0 20px rgba(44, 182, 125, 0.9); }
+    100% { box-shadow: 0 0 0 2px var(--accent-secondary), 0 0 15px rgba(44, 182, 125, 0.6); }
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+    .game-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .game-controls {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .difficulty-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    #game-board {
+        max-width: 350px;
+    }
+    
+    .cell {
+        font-size: 1.2rem;
+    }
+    
+    .cell.queen::after {
+        font-size: 1.5rem;
+    }
+    
+    .cell.marked::after {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 400px) {
+    #game-board {
+        max-width: 300px;
+    }
+    
+    .game-controls {
+        gap: 8px;
+    }
+    
+    .icon-button {
+        width: 34px;
+        height: 34px;
+    }
+}
