@@ -743,6 +743,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // 1. Cells in the same row
         // 2. Cells in the same column
         // 3. Cells in adjacent positions (including diagonally)
+        // 4. All other cells in the same colored region/block
         
         // Mark cells in the same row
         for (let c = 0; c < boardSize; c++) {
@@ -790,6 +791,30 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Track auto-placed X
                     trackAutoPlacedX(r, c, row, col);
+                }
+            }
+        }
+        
+        // Mark all cells in the same region/block
+        const queenRegionIndex = getRegionIndex(row, col);
+        
+        // Iterate through the entire board to find cells in the same region
+        for (let r = 0; r < boardSize; r++) {
+            for (let c = 0; c < boardSize; c++) {
+                // Skip the queen cell itself and any already placed queens
+                if ((r === row && c === col) || currentBoard[r][c] === 1) continue;
+                
+                // If cell is in the same region as the queen
+                if (getRegionIndex(r, c) === queenRegionIndex) {
+                    // Mark the cell with X if it's empty
+                    if (currentBoard[r][c] === 0) {
+                        currentBoard[r][c] = 2;
+                        const cell = getCellElement(r, c);
+                        cell.classList.add('marked');
+                        
+                        // Track auto-placed X
+                        trackAutoPlacedX(r, c, row, col);
+                    }
                 }
             }
         }
