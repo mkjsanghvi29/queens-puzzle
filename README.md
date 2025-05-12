@@ -1,6 +1,6 @@
 # Queens Puzzle Game
 
-A challenging logic puzzle game based on the classic N-Queens problem, presented in an interactive web format.
+A challenging logic puzzle game based on the classic N-Queens problem, presented in an interactive web format. You can access the game at https://mkjsanghvi29.github.io/queens-puzzle/
 
 ## How to Play
 
